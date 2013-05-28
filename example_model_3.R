@@ -1,8 +1,5 @@
 #!/usr/bin/Rscript
 
-library('ProjectTemplate')
-try(load.project())
-
 training.data <- merge(training.data, topics, by = 'Package', all.x = TRUE)
 training.data <- transform(training.data, Topic = factor(Topic))
 
@@ -14,7 +11,7 @@ logit.fit <- glm(Installed ~ LogDependencyCount +
                              CorePackage +
                              RecommendedPackage +
                              factor(User) +
-                             Topic,
+                             Topic, #adds topic as a factor
                  data = training.data,
                  family = binomial(link = 'logit'))
 

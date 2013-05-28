@@ -1,6 +1,6 @@
 #!/usr/bin/Rscript
 
-source('example_model.R')
+source('devn_model.R')
 
 training.data$LogitProbabilities <- 1 / (1 + exp(-predict(logit.fit)))
 

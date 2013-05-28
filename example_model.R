@@ -1,8 +1,5 @@
 #!/usr/bin/Rscript
 
-library('ProjectTemplate')
-try(load.project())
-
 logit.fit <- glm(Installed ~ LogDependencyCount +
                              LogSuggestionCount +
                              LogImportCount +
@@ -14,3 +11,5 @@ logit.fit <- glm(Installed ~ LogDependencyCount +
                  family = binomial(link = 'logit'))
 
 summary(logit.fit)
+
+training.data

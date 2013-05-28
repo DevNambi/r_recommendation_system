@@ -106,3 +106,11 @@ packages <- transform(packages, LogSuggestionCount = log(1 + SuggestionCount))
 packages <- transform(packages, LogImportCount = log(1 + ImportCount))
 packages <- transform(packages, LogViewsIncluding = log(1 + ViewsIncluding))
 packages <- transform(packages, LogPackagesMaintaining = log(1 + PackagesMaintaining))
+
+# add in the stackoverflow data
+stack.overflow$LogQuestions  <- log(1 + stack.overflow$Questions)
+stack.overflow$LogScore      <- log(1 + stack.overflow$Score)
+stack.overflow$LogAnswers    <- log(1 + stack.overflow$Answers)
+stack.overflow$LogReputation <- log(1 + stack.overflow$Reputation)
+stack.overflow$LogViews      <- log(1 + stack.overflow$Views)
+
