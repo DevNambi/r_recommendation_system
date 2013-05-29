@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 
 training.data <- merge(training.data, topics, by = 'Package', all.x = TRUE)
+training.data$Topic[is.na(training.data$Topic) == TRUE] <- 26
 training.data <- transform(training.data, Topic = factor(Topic))
 
 logit.fit <- glm(Installed ~ LogDependencyCount +

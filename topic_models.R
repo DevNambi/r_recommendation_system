@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript
 
 library('ProjectTemplate')
-load.project()
+#load.project()
 
 library('tm')
 library('topicmodels')

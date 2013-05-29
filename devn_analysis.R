@@ -15,8 +15,9 @@ logit.fit <- glm(Installed ~ LogDependencyCount +
                    LogImportCount +
                    LogViewsIncluding +
                    LogPackagesMaintaining +
-                   LogScore + 
+                   #LogScore + 
                    LogAnswers +
+                   LogQuestions + 
                    LogReputation +
                    CorePackage +
                    RecommendedPackage +
@@ -38,10 +39,9 @@ qplot(data=training.data, x=LogViewsIncluding, y=log(Views)) #straight line.
 qplot(data=training.data, x=LogViewsIncluding, y=LogQuestions) #Still noisy
 qplot(data=training.data, x=LogViewsIncluding, y=LogReputation) #a trend, but a lot of signal there
 qplot(data=training.data, x=LogViewsIncluding, y=LogAnswers) #another trend, with a lot of signal
-qplot(data=training.data, x=LogViewsIncluding, y=LogScore)
+qplot(data=training.data, x=LogViewsIncluding, y=LogScore) #a clear trend. Good idea.
 
 
-qplot(data=training.data, x=LogQuestions, geom="density", facet="Installed")
 qplot(data=training.data, x=as.factor(Installed), y=LogQuestions, geom="boxplot") #huge difference
 qplot(data=training.data, x=as.factor(Installed), y=LogScore, geom="boxplot") #still a big difference
 qplot(data=training.data, x=as.factor(Installed), y=LogAnswers, geom="boxplot") #huge difference

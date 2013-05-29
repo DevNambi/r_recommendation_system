@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
+library('SortableHTMLTables')
 
-source('devn_model.R')
+#source('example_model_2.R')
 
 training.data$LogitProbabilities <- 1 / (1 + exp(-predict(logit.fit)))
 
@@ -25,8 +26,18 @@ mean.absolute.error <- with(probabilities,
 worst.case.absolute.error <- with(probabilities,
                                   max(abs(PredictedProbability - EmpiricalProbability)))
 
-library('SortableHTMLTables')
+auc(outcome=probabilities$EmpiricalProbability, proba=probabilities$PredictedProbability)
 
-sortable.html.table(probabilities,
-                    'probabilities.html',
-                    'reports')
+
+#sortable.html.table(probabilities, 'probabilities.html','reports')
+
+auc <- function(outcome, proba){
+  N = length(proba)
+  N_pos = sum(outcome)
+  df = data.frame(out = outcome, prob = proba)
+  df = df[order(-df$prob),]
+  df$above = (1:N) - cumsum(df$out)
+  return( 1- sum( df$above * df$out ) / (N_pos * (N-N_pos) ) )
+}
+
+#qplot(data=probabilities[order(-probabilities$EmpiricalProbability),], x=EmpiricalProbability, y=abs(EmpiricalProbability-PredictedProbability))
