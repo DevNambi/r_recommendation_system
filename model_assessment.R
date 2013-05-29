@@ -18,6 +18,8 @@ probabilities <- merge(predicted.probabilities,
                        empirical.probabilities,
                        by = 'Package')
 
+probabilities$ProbabilityError <- abs(probabilities$PredictedProbability - probabilities$EmpiricalProbability)
+
 mean.absolute.error <- with(probabilities,
                             mean(abs(PredictedProbability - EmpiricalProbability)))
 worst.case.absolute.error <- with(probabilities,
