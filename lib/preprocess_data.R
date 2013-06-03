@@ -110,26 +110,26 @@ packages <- transform(packages, LogPackagesMaintaining = log(1 + PackagesMaintai
 # add in the stackoverflow data
 stack.overflow$Score[stack.overflow$Score < 0] <- 0.0
 stack.overflow$MedianScore[stack.overflow$MedianScore < 0] <- 0.0
-stack.overflow$AverageScore <- stack.overflow$Score / stack.overflow$Questions
-stack.overflow$AverageAnswers <- stack.overflow$Answers / stack.overflow$Questions
-stack.overflow$AverageReputation <- stack.overflow$Reputation / stack.overflow$Questions
-stack.overflow$AverageViews <- stack.overflow$Views <- stack.overflow$Questions
-stack.overflow$AverageScore[is.na(stack.overflow$AverageScore) == TRUE ] <- 0.0
-stack.overflow$AverageAnswers[is.na(stack.overflow$AverageAnswers) == TRUE ] <- 0.0
-stack.overflow$AverageReputation[is.na(stack.overflow$AverageReputation) == TRUE ] <- 0.0
-stack.overflow$AverageViews[is.na(stack.overflow$AverageViews) == TRUE ] <- 0.0
+#stack.overflow$AverageScore <- stack.overflow$Score / stack.overflow$Questions
+#stack.overflow$AverageAnswers <- stack.overflow$Answers / stack.overflow$Questions
+#stack.overflow$AverageReputation <- stack.overflow$Reputation / stack.overflow$Questions
+#stack.overflow$AverageViews <- stack.overflow$Views <- stack.overflow$Questions
+#stack.overflow$AverageScore[is.na(stack.overflow$AverageScore) == TRUE ] <- 0.0
+##stack.overflow$AverageAnswers[is.na(stack.overflow$AverageAnswers) == TRUE ] <- 0.0
+#stack.overflow$AverageReputation[is.na(stack.overflow$AverageReputation) == TRUE ] <- 0.0
+#stack.overflow$AverageViews[is.na(stack.overflow$AverageViews) == TRUE ] <- 0.0
 
 
-stack.overflow$LogQuestions  <- log(1 + stack.overflow$Questions)
-stack.overflow$LogScore      <- log(1 + stack.overflow$Score)
-stack.overflow$LogAnswers    <- log(1 + stack.overflow$Answers)
-stack.overflow$LogReputation <- log(1 + stack.overflow$Reputation)
+#stack.overflow$LogQuestions  <- log(1 + stack.overflow$Questions)
+#stack.overflow$LogScore      <- log(1 + stack.overflow$Score)
+#stack.overflow$LogAnswers    <- log(1 + stack.overflow$Answers)
+#stack.overflow$LogReputation <- log(1 + stack.overflow$Reputation)
 stack.overflow$LogViews      <- log(1 + stack.overflow$Views)
 stack.overflow$LogMedianScore <- log(1 + stack.overflow$MedianScore)
 stack.overflow$LogMedianAnswers <- log(1 + stack.overflow$MedianAnswers)
 stack.overflow$LogMedianViews <- log (1 + stack.overflow$MedianViews)
 stack.overflow$LogMedianReputation <- log (1 + stack.overflow$MedianReputations)
-stack.overflow$LogAverageScore <- log(1 + stack.overflow$AverageScore)
-stack.overflow$LogAverageAnswers <- log(1 + stack.overflow$AverageAnswers)
-stack.overflow$LogAverageViews <- log (1 + stack.overflow$AverageViews)
-stack.overflow$LogAverageReputation <- log (1 + stack.overflow$AverageReputation)
+#stack.overflow$LogAverageScore <- log(1 + stack.overflow$AverageScore)
+#stack.overflow$LogAverageAnswers <- log(1 + stack.overflow$AverageAnswers)
+#stack.overflow$LogAverageViews <- log (1 + stack.overflow$AverageViews)
+#stack.overflow$LogAverageReputation <- log (1 + stack.overflow$AverageReputation)

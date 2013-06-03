@@ -1,5 +1,6 @@
 #!/usr/bin/Rscript
 library('SortableHTMLTables')
+library('pROC')
 
 #source('example_model_2.R')
 
@@ -20,6 +21,8 @@ probabilities <- merge(predicted.probabilities,
                        by = 'Package')
 
 probabilities$ProbabilityError <- abs(probabilities$PredictedProbability - probabilities$EmpiricalProbability)
+
+roc(probabilities$EmpiricalProbability, probabilities$PredictedProbability)
 
 mean.absolute.error <- with(probabilities,
                             mean(abs(PredictedProbability - EmpiricalProbability)))

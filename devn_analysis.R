@@ -1,10 +1,12 @@
 #devn data investigation
+library(pROC)
 
 #!/usr/bin/Rscript
 
 training.data.old <- training.data
 #training.data <- training.data.old
 training.data <- merge(training.data, topics, by = 'Package', all.x = TRUE)
+training.data$Topic[is.na(training.data$Topic) == TRUE] <- 0
 training.data <- transform(training.data, Topic = factor(Topic))
 training.data <- merge(training.data, stack.overflow, by = 'Package', all.x = TRUE)
 training.data$Topic.y <- NULL
@@ -14,19 +16,32 @@ logit.fit <- glm(Installed ~ LogDependencyCount +
                    LogSuggestionCount +
                    LogImportCount +
                    LogViewsIncluding +
-                   MedianScore +
                    LogPackagesMaintaining +
-                   LogAnswers +
-                   LogQuestions +
+                   LogMedianReputation +
+                   LogMedianScore +
+                   LogMedianViews +
                    CorePackage +
-                  #factor(User) +
-                   RecommendedPackage,
-                 #remove topic because of NAs?
+                   RecommendedPackage +
+                   factor(User) +
+                   Topic, #adds topic as a factor
                  data = training.data,
                  family = binomial(link = 'logit'))
 
 # summary(logit.fit)
 # length(predict(logit.fit))
+training.data$LogitProbabilities <- NULL
+training.data$LogitProbabilities <- predict(logit.fit,type="response")
+training.data$LogitProbabilities[training.data$Package == 'R'] <- 0
+training.data$LogitProbabilities[training.data$Package == 'base'] <- 1
+
+
+logit.roc <- roc(training.data$Installed, training.data$LogitProbabilities)
+logit.roc$auc
+plot(logit.roc)
+
+
+
+
 
 qplot(data=training.data, x=Questions, geom="density") #weird looking
 qplot(data=training.data, x=Score, geom="density") #big spike, potentially useful
@@ -41,7 +56,6 @@ qplot(data=training.data, x=AverageScore, geom="density") #big spike
 qplot(data=training.data, x=AverageAnswers, geom="density") #several spikes. This has a lot of signal
 qplot(data=training.data, x=AverageViews, geom="density") #big spike, but messy
 qplot(data=training.data, x=AverageReputation, geom="density") #big spike
-
 
 
 
